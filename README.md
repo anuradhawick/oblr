@@ -112,6 +112,6 @@ python sage_label_prop.py \
 
 ### 🛑 
 
-This code is under construction. Hence notebooks are advised over the pipeline. It also facilitates plots and much more. `kbm2` is the most resource demanding step. ~32GB of RAM of above is recommended. If you have fast storage consider increasing swap. May be slower but kbm2 will run for sure.
+This code is under construction. Hence notebooks are advised over the pipeline. It also facilitates plots and much more. `kbm2` is the most resource demanding step. ~32GB of RAM or above is recommended. If you have fast storage consider increasing swap. May be slower but kbm2 will run for sure.
 
 Rapids.AI is advise as worst case GPU time was 1:30.83 while CPU time was 34:15.96 in a 32 thread machine (almost 1000x gain in speed compared to single threaded mode).
