@@ -2,6 +2,10 @@
 
 This is a pipeline to perform long reads binning using the read overlap information.
 
+## A runnable Colab version is available
+
+Try here: [https://colab.research.google.com/drive/1LXQTiCatq55zIvKjguEgLiWH4bWAdyi6?usp=sharing](https://colab.research.google.com/drive/1LXQTiCatq55zIvKjguEgLiWH4bWAdyi6?usp=sharing)
+
 ## Pre-requisites
 
 ### Tools needed
