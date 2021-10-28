@@ -25,7 +25,7 @@ You can run OBLR with CPU only. However, this can be extremely slow. The recomme
 
 #### Rapids.AI environment should have the following
 
-* CuML from (https://rapids.ai/start.html)[https://rapids.ai/start.html]
+* CuML from [https://rapids.ai/start.html](https://rapids.ai/start.html)
 * tqdm
 * numpy
 * pandas
