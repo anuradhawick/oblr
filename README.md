@@ -110,7 +110,7 @@ python sage_label_prop.py \
 
 > Note if you chose to run everything in a single script, refer to file `oblr_runner.sh` to see how one can change conda environment in a bash file.
 
-### :stop: 
+### 🛑 
 
 This code is under construction. Hence notebooks are advised over the pipeline. It also facilitates plots and much more. `kbm2` is the most resource demanding step. ~32GB of RAM of above is recommended. If you have fast storage consider increasing swap. May be slower but kbm2 will run for sure.
 
