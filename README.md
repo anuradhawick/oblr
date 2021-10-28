@@ -64,7 +64,7 @@ exp = "./test_data/"
 seqtk rename $exp/reads.fastq read_ | seqtk seq -A > $exp/reads.fasta
 
 # obtaining read ids
-!grep ">" $exp/reads.fasta > $exp/read_ids
+grep ">" $exp/reads.fasta > $exp/read_ids
 ```
 
 **Step-2:** Build the graph
