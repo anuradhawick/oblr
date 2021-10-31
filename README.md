@@ -4,7 +4,7 @@ This is a pipeline to perform long reads binning using the read overlap informat
 
 ## A runnable Colab version is available
 
-Try here: [https://colab.research.google.com/drive/1LXQTiCatq55zIvKjguEgLiWH4bWAdyi6?usp=sharing](https://colab.research.google.com/drive/1LXQTiCatq55zIvKjguEgLiWH4bWAdyi6?usp=sharing)
+Try the program <a href="https://colab.research.google.com/drive/1LXQTiCatq55zIvKjguEgLiWH4bWAdyi6?usp=sharing" target="_blank">at Google Colab</a>
 
 ## Pre-requisites
 
