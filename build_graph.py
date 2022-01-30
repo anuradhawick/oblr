@@ -6,6 +6,7 @@ import gzip
 import os
 import numpy as np
 from collections import Counter
+from Bio import SeqIO
 
 '''
 GPU TIME
@@ -78,7 +79,7 @@ def get_idx_maps(read_ids_file_path, truth):
 
     with open(read_ids_file_path) as read_ids_file:
         for t, rid in tqdm(zip(truth, read_ids_file)):
-            rid = rid.strip()[1:]
+            rid = rid.strip()
             reads_truth[rid] = t
             read_id_idx[rid] = len(read_id_idx)
 
@@ -165,7 +166,7 @@ def get_best_embedding(data, weights):
     best_embedding = None
     best_cluster_count = None
     
-    for sample_size in [25000, 50000, 100000]:
+    for sample_size in [25000, 50000, 100000, 200000, 400000]:
         print(f'Scanning sample size {sample_size}')
         sample_idx = np.random.choice(range(len(data)), size=sample_size, replace=False, p=weights/weights.sum())
         sampled_data = data[sample_idx]
@@ -212,8 +213,8 @@ if __name__ == '__main__':
                         help="K-mer features file",
                         type=str,
                         required=True)
-    parser.add_argument('--read-ids', '-i',
-                        help="Set of ids for the reads",
+    parser.add_argument('--reads', '-r',
+                        help="Reads path",
                         type=str,
                         required=True)
     parser.add_argument('--ground-truth', '-g',
@@ -230,7 +231,7 @@ if __name__ == '__main__':
     features = args.features
     has_truth = args.ground_truth is not None
     output = args.output
-    read_ids = args.read_ids
+    reads = args.reads
 
     comp = pd.read_csv(features, delimiter=' ', header=None).to_numpy()
 
@@ -243,7 +244,28 @@ if __name__ == '__main__':
     if not os.path.isdir(output):
         os.mkdir(output)
 
-    reads_truth, read_id_idx = get_idx_maps(read_ids, truth)
+    with open(f'{output}/read_ids', 'w+') as idf:
+        if reads.split('.')[-1] in ['gz', 'zip']:
+            z = True
+            fmt = reads.split('.')[-2]
+        else:
+            z = False
+            fmt = reads.split('.')[-1]
+
+        if fmt in ['fasta', 'fa', 'fna']:
+            fmt = "fasta"
+        else:
+            fmt = "fastq"
+        
+        if not z:
+            for record in SeqIO.parse(reads, fmt):
+                idf.write(record.id.strip() + '\n')
+        else:
+            with gzip.open(reads, "rt") as rf:       
+                for record in SeqIO.parse(rf, fmt):
+                    idf.write(record.id.strip() + '\n')
+
+    reads_truth, read_id_idx = get_idx_maps(f'{output}/read_ids', truth)
 
     degree_array = load_read_degrees(degrees_file_path, len(comp), read_id_idx)
 
@@ -278,19 +300,21 @@ if __name__ == '__main__':
     cluster_counts = sorted(cluster_counts.most_common(),
                             key=lambda x: (x[1], x[0]), reverse=True)
     chose = cluster_counts[0][0]
+    chose_occurences = cluster_counts[0][1]
 
     print(f"Count stats = {cluster_counts}")
-    print(f'Maximally occuring cluster count = {chose}')
+    print(f'Maximally occuring cluster count = {chose} occurences = {chose_occurences}')
 
-    size, sample_size, score, clusters, cluster_count, embedding, sample_idx = None, None, - \
-        1, None, 0, None, None
+    size, sample_size, score, clusters, cluster_count, embedding, sample_idx = None, None, -1, None, 0, None, None
 
     for result in results:
-        if result[4] == chose and result[2] > score:
+        if chose_occurences > 1 and result[4] == chose and result[2] > score:
             size, sample_size, score, clusters, cluster_count, embedding, sample_idx = result
-
-    print(
-        f'Chosen Score = {score} Sample_size = {sample_size:5} Size = {size} Clusters = {cluster_count}')
+            
+        if chose_occurences == 1 and result[2] > score: # fallback to max score
+            size, sample_size, score, clusters, cluster_count, embedding, sample_idx = result
+            
+    print(f"Chosen sample size {sample_size}, score {score}, clusters {cluster_count}")
 
     # rename clusters
     clusters = rename_clusters(clusters)

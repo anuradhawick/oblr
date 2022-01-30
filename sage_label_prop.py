@@ -175,7 +175,7 @@ if __name__ == '__main__':
     # sampler for predicting
     subgraph_loader = NeighborSampler(data.edge_index,
                                       node_idx=None,
-                                      sizes=[-1],
+                                      sizes=[100],
                                       pin_memory=True,
                                       batch_size=10240,
                                       shuffle=False,

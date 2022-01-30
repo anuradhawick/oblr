@@ -4,9 +4,13 @@ import gzip
 import numpy as np
 
 path = "./"
+prefix = ""
 
-if len(sys.argv) == 2:
+if len(sys.argv) >= 2:
     path = sys.argv[1] + "/"
+
+if len(sys.argv) >= 3:
+    prefix = sys.argv[2]
 
 class Alignment:
     def __init__(self, line):
@@ -109,8 +113,8 @@ def process_batch(alignments, fpe, fpd):
 
 active_query = None
 alns_buffer = []
-out_file_edges = open(path + 'reads.alns', 'w+')
-out_file_degree = open(path + 'degree', 'w+')
+out_file_edges = open(path + prefix + 'reads.alns', 'w+')
+out_file_degree = open(path + prefix + 'degree', 'w+')
 
 for line in fileinput.input('-'):
     if len(line.strip()) == 1:

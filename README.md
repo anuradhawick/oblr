@@ -75,8 +75,8 @@ exp = "./test_data/"
 # compute 4mer vectors (-t for threads)
 seq2vec -k 4 -o $exp/4mers -f $exp/reads.fasta -t 32
 
-# run kbm2 (-t for threads)
-kbm2  -i $exp/reads.fasta -d $exp/reads.fasta -n 2000 -l 2560 -t 32 | python filter_alignments.py $exp/
+# build the graph using chunked reads
+./buildgraph_with_chunks.sh -r $exp//reads.fasta -c <CHUNK_SIZE> -o $exp/
 ```
 
 **Step-3:** Detect clusters
