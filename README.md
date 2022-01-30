@@ -2,6 +2,10 @@
 
 This is a pipeline to perform long reads binning using the read overlap information.
 
+## A runnable Colab version is available
+
+Try the program <a href="https://colab.research.google.com/drive/1LXQTiCatq55zIvKjguEgLiWH4bWAdyi6?usp=sharing" target="_blank">at Google Colab</a>
+
 ## Pre-requisites
 
 ### Tools needed
@@ -25,7 +29,7 @@ You can run OBLR with CPU only. However, this can be extremely slow. The recomme
 
 #### Rapids.AI environment should have the following
 
-* CuML from (https://rapids.ai/start.html)[https://rapids.ai/start.html]
+* CuML from [https://rapids.ai/start.html](https://rapids.ai/start.html)
 * tqdm
 * numpy
 * pandas
@@ -110,8 +114,8 @@ python sage_label_prop.py \
 
 > Note if you chose to run everything in a single script, refer to file `oblr_runner.sh` to see how one can change conda environment in a bash file.
 
-### :stop: 
+### 🛑 
 
-This code is under construction. Hence notebooks are advised over the pipeline. It also facilitates plots and much more. `kbm2` is the most resource demanding step. ~32GB of RAM of above is recommended. If you have fast storage consider increasing swap. May be slower but kbm2 will run for sure.
+This code is under construction. Hence notebooks are advised over the pipeline. It also facilitates plots and much more. `kbm2` is the most resource demanding step. ~32GB of RAM or above is recommended. If you have fast storage consider increasing swap. May be slower but kbm2 will run for sure.
 
 Rapids.AI is advise as worst case GPU time was 1:30.83 while CPU time was 34:15.96 in a 32 thread machine (almost 1000x gain in speed compared to single threaded mode).
