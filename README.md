@@ -119,3 +119,16 @@ python sage_label_prop.py \
 `kbm2` is the most resource demanding step. ~32GB of RAM or above is recommended. If you have fast storage consider increasing swap. May be slower but kbm2 will run for sure. Alternatively, use the chunked version of the graph building in as shown in **step 2**.
 
 Rapids.AI is advised as worst case GPU time was 1:30.83 while CPU time was 34:15.96 in a 32 thread machine (almost 1000x gain in speed compared to single threaded mode).
+
+## Please cite as follows
+
+```bibtex
+@inproceedings{wickramarachchi2022metagenomics,
+  title={Metagenomics Binning of Long Reads Using Read-Overlap Graphs},
+  author={Wickramarachchi, Anuradha and Lin, Yu},
+  booktitle={Comparative Genomics: 19th International Conference, RECOMB-CG 2022, La Jolla, CA, USA, May 20--21, 2022, Proceedings},
+  pages={260--278},
+  year={2022},
+  organization={Springer}
+}
+```
