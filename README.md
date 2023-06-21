@@ -1,4 +1,4 @@
-# Read Over Binning of Long Reads (OBLR)
+# Overlap based Binning of Long Reads (OBLR)
 
 This is a pipeline to perform long reads binning using the read overlap information.
 
